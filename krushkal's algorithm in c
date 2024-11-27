@@ -3,8 +3,10 @@
 #include<stdbool.h>
 #define V 4 // no of vertices = 4
 #define E 4 // no of edges = 4
-/*
- code by vansaj Rawat
+/* 
+ simplest code 
+ code by vansaj Rawat (Must know about the basics of disjoint set data structure and cycle detection using Disjoint set )
+
  eg:- this is our graph
  
     0--(10)--1
