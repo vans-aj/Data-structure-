@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdbool.h>
+#define V 4 // no of vertices = 4
+#define E 4 // no of edges = 4
+/*
+ code by vansaj Rawat
+ eg:- this is our graph
+ 
+    0--(10)--1
+    |      __/
+ (20)  (30)
+    | /
+    2--(5)--3
+ 
+ */
+
+typedef struct edge{
+    int src,dest,wt;
+}edge;
+edge mst[V-1];
+// for using in built quick sort
+int compareEdges(const void* a, const void* b) {
+    struct edge* edgeA = (struct edge*)a;
+    struct edge* edgeB = (struct edge*)b;
+    return edgeA->wt - edgeB->wt;
+}
+
+int find(int v,int s[]){
+    if(s[v] == -1) return v;
+   return find(s[v],s);
+   
+}
+void unionset(int from,int to,int s[]){
+    int f = find(from,s);
+    int t = find(to,s);
+    s[f] = t;
+}
+void krushkal(edge adj[]){
+    qsort(adj, E, sizeof(edge), compareEdges);
+    int s[V] ;
+    for (int i =0; i<V; i++){
+        s[i] = -1;
+    }
+    int i =0,j=0;
+    while(i<V-1 && j<E)
+        {
+            int fromP = find(adj[j].src,s);
+            int toP = find(adj[j].dest,s);
+            
+            if(fromP != toP){
+                mst[i++] =adj[j];
+                unionset(fromP,toP,s);
+            }
+            j++;
+        }
+    
+}
+void printMST (edge mst[]){
+    for (int i=0; i<V-1; i++){
+        printf("%d -- %d == %d\n",mst[i].src,mst[i].dest,mst[i].wt);
+    }
+}
+int main(void) {
+    edge adj[E] = {
+        {0, 1, 10},
+        {0, 2, 20},
+        {1, 2, 30},
+        {2, 3, 5}
+    };
+    krushkal(adj);
+    printMST(mst);
+    return 0;
+}
+
