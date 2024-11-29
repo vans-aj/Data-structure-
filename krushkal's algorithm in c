@@ -5,7 +5,7 @@
 #define E 4 // no of edges = 4
 /* 
  simplest code 
- code by vansaj Rawat (Must know about the basics of disjoint set data structure and cycle detection using Disjoint set )
+ Must know about the basics of disjoint set data structure and cycle detection using Disjoint set 
 
  eg:- this is our graph
  
@@ -74,4 +74,4 @@ int main(void) {
     printMST(mst);
     return 0;
 }
-
+// vansaj Rawat
