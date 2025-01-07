@@ -4,7 +4,7 @@
 #define V 4 // no of vertices = 4
 #define E 4 // no of edges = 4
 /* 
- simplest code 
+
  Must know about the basics of disjoint set data structure and cycle detection using Disjoint set 
 
  eg:- this is our graph
