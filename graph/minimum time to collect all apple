@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int dfs(vector<vector<int>>&graph , vector<bool>& hasApple, vector<int>&vis, int src){
+        vis[src] = 1;
+        int ans  =0;
+        for (int i =0; i<graph[src].size(); i++){
+            if (vis[graph[src][i]]==0){
+                int cost =  dfs(graph,hasApple,vis,graph[src][i]);
+                if (cost>0 || hasApple[graph[src][i]]){
+                    ans += cost+2;
+                }
+            }            
+        }
+        return ans;
+    }
+    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+        vector<vector<int>>graph(n);
+        for (int i =0; i<edges.size(); i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            graph[u].push_back(v);
+            graph[v].push_back(u);
+        }
+        vector<int>vis(n,0);
+        return max(0,dfs(graph,hasApple,vis,0));
+    }
+};
