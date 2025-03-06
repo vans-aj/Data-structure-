@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> dfs(vector<vector<int>>& graph, vector<int>& vis, int src, vector<int>& ans, string& labels) {
+        vis[src] = 1;
+        vector<int> count(26, 0); 
+        count[labels[src] - 'a'] = 1;
+        for (int i = 0; i < graph[src].size(); i++) {
+            if (vis[graph[src][i]] == 0) {
+                vector<int> subCount = dfs(graph, vis, graph[src][i], ans, labels);
+                for (int j = 0; j < 26; j++) {
+                    count[j] += subCount[j];
+                }
+            }
+        }
+        ans[src] = count[labels[src] - 'a'];
+        return count;
+    }
+
+    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
+        vector<vector<int>> graph(n);
+        for (int i = 0; i < edges.size(); i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            graph[u].push_back(v);
+            graph[v].push_back(u);
+        }
+        vector<int> vis(n, 0);
+        vector<int> ans(n);
+        dfs(graph, vis, 0, ans, labels);
+        return ans;
+    }
+};
