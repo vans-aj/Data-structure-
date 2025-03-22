@@ -1,0 +1,29 @@
+public int maxDistance(List<List<Integer>> arrays) {
+        int min = Integer.MAX_VALUE, secondMin = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE, secondMax = Integer.MIN_VALUE;
+        int minIndex = -1, maxIndex = -1;
+        for (int i = 0; i < arrays.size(); i++) {
+            int first = arrays.get(i).get(0);
+            int last = arrays.get(i).get(arrays.get(i).size() - 1);
+            if (first < min) {
+                secondMin = min;  
+                min = first;
+                minIndex = i;
+            }
+            else if (first < secondMin) {
+                secondMin = first;
+            }
+            if (last > max) {
+                secondMax = max;  
+                max = last;
+                maxIndex = i;
+            } 
+            else if (last > secondMax) {
+            secondMax = last;
+        }
+    }
+    if (minIndex != maxIndex) {
+        return max - min;
+    } else {
+        return Math.max(secondMax - min, max - secondMin);
+    }
