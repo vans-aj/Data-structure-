@@ -1,0 +1,12 @@
+long long int count(long long int n)
+    {
+    	vector<int> dp(n + 1, 0);
+        dp[0] = 1;
+        vector<int> points = {3, 5, 10};
+        for (int p : points) {
+            for (int i = p; i <= n; ++i) {
+                dp[i] += dp[i - p];
+            }
+        }
+        return dp[n];
+    }
