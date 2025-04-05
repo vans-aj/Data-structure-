@@ -1,0 +1,15 @@
+int n = s.length();
+        int i = 0;
+        int maxfq = 0;
+        vector<int>fq(26,0);
+        int maxl = 0;
+        for (int j =0; j<n; j++){
+            fq[s[j]-'A']++;
+            maxfq = max(maxfq,fq[s[j]-'A']);
+            if ((j-i+1)-maxfq > k){
+                fq[s[i]-'A']--;
+                i++;
+            }
+            maxl = max(maxl,j-i+1);
+        }
+        return maxl;
